@@ -19,6 +19,12 @@ db.authenticate()
   .then(() => console.log("SQLite3 database is running"))
   .catch(() => console.log("Unable to connect to SQLite3 database :("));
 
+db.sync()
+  .then(() => console.log("SQLite3 synchnorized"))
+  .catch(() =>
+    console.log("An exception was encountered while synchnorizing database")
+  );
+
 app.listen(PORT, () => {
   console.log(`Listening on http://localhost:${PORT}`);
 });
