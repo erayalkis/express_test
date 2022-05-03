@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const userRouter = require("./routes/users");
+const db = require("./db/sqlite");
 
 const PORT = 3000;
 
@@ -14,5 +15,9 @@ app.get("/", (req, res) => {
 
 app.use("/users", userRouter);
 
-app.listen(PORT);
-console.log(`Listening on http://localhost:${PORT}`);
+db.sync().then(() => {
+  console.log("SQLite3 database is running");
+});
+app.listen(PORT, () => {
+  console.log(`Listening on http://localhost:${PORT}`);
+});
