@@ -15,9 +15,10 @@ app.get("/", (req, res) => {
 
 app.use("/users", userRouter);
 
-db.sync().then(() => {
-  console.log("SQLite3 database is running");
-});
+db.authenticate()
+  .then(() => console.log("SQLite3 database is running"))
+  .catch(() => console.log("Unable to connect to SQLite3 database :("));
+
 app.listen(PORT, () => {
   console.log(`Listening on http://localhost:${PORT}`);
 });
