@@ -6,6 +6,8 @@ router.use(logger); // Will run the logger for each path
 // Ex. router.get("/", logger, (req, res) => {...}) <- This would run the logger for this route only
 
 router.get("/", (req, res) => {
+  console.log(req.query.name);
+
   res.status(200).send("Users list");
 });
 
