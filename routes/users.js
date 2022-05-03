@@ -10,11 +10,12 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
+  console.log(req.body.firstName);
   res.status(200).send("Create user");
 });
 
 router.get("/new", (req, res) => {
-  res.status(200).send("New user form");
+  res.status(200).render("users/new");
 });
 
 router
