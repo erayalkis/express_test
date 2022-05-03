@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const db = require("../db/sqlite");
+const User = require("../models/User");
 
 router.use(logger); // Will run the logger for each path
 // If you wanted to run it for just a specific path, you need to add it as a function
@@ -12,7 +14,13 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  console.log(req.body.firstName);
+  let { firstName, lastName, age } = req.body;
+
+  try {
+    User.build({ firstName, lastName, age });
+  } catch (e) {
+    console.log(e);
+  }
   res.status(200).send("Create user");
 });
 
