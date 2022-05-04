@@ -9,7 +9,7 @@ router.use(logger); // Will run the logger for each path
 router.get("/", async (req, res) => {
   const users = await User.findAll();
 
-  res.status(200).send(users);
+  res.status(200).render("users/index", { users });
 });
 
 router.post("/", (req, res) => {
