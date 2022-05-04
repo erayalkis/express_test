@@ -6,16 +6,18 @@ router.use(logger); // Will run the logger for each path
 // If you wanted to run it for just a specific path, you need to add it as a function
 // Ex. router.get("/", logger, (req, res) => {...}) <- This would run the logger for this route only
 
-router.get("/", (req, res) => {
-  console.log(req.query.name);
+router.get("/", async (req, res) => {
+  const users = await User.findAll();
 
-  res.status(200).send("Users list");
+  res.status(200).send(users);
 });
 
 router.post("/", (req, res) => {
   let { firstName, lastName, age } = req.body;
   try {
-    User.create({ firstName, lastName, age });
+    User.create({ firstName, lastName, age }).catch((e) => {
+      throw e;
+    });
   } catch (e) {
     console.log(e);
   }
@@ -39,7 +41,7 @@ router
   });
 
 function logger(req, res, next) {
-  console.log(req.originalUrl);
+  console.log(`[${req.method}] ${req.originalUrl}`);
   next();
 }
 
