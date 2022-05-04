@@ -36,8 +36,11 @@ router
   .put((req, res) => {
     res.send(`Edit user with id ${req.params.id}`);
   })
-  .delete((req, res) => {
-    res.send(`Delete user with id ${req.params.id}`);
+  .delete(async (req, res) => {
+    const user = await User.findOne({ id: req.params.id });
+    user.destroy();
+
+    res.redirect("/users");
   });
 
 function logger(req, res, next) {
