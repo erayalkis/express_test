@@ -22,9 +22,4 @@ const User = db.define("User", {
   },
 });
 
-(async () => {
-  await db.sync({ force: true });
-  // Code here
-})();
-
-exports.defaults = User;
+module.exports = User;
