@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const db = require("../db/sqlite");
 const User = require("../models/User");
 
 router.use(logger); // Will run the logger for each path
@@ -15,9 +14,8 @@ router.get("/", (req, res) => {
 
 router.post("/", (req, res) => {
   let { firstName, lastName, age } = req.body;
-
   try {
-    User.build({ firstName, lastName, age });
+    User.create({ firstName, lastName, age });
   } catch (e) {
     console.log(e);
   }
